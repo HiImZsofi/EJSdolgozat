@@ -1,12 +1,16 @@
 import {
+  Body,
   Controller,
   Get,
   Param,
+  Post,
   Query,
+  Redirect,
   Render,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import db from './db';
+import { MacskaDto } from './macska.dto';
 
 @Controller()
 export class AppController {
@@ -34,4 +38,23 @@ export class AppController {
         }
       }
     }
+
+
+    @Get('macska/new')
+    @Render('form')
+    ujCicaForm() {
+    return {};
+  }
+
+  @Post('macska/new')
+  @Redirect()
+  async newMacska(@Body() macska: MacskaDto){
+    const [result]: any = await db.execute(
+      'INSERT INTO macskak (szem_szin, suly) VALUES (?, ?)',
+      [ macska.szem_szin, macska.suly ]
+    );
+    return{
+      url: '/',
+    }
+  }
   }
