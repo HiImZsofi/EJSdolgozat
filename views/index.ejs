@@ -9,6 +9,17 @@
     <script src='main.js'></script>
 </head>
 <body>
+
+    <form method="get">
+        <input type="text" name="szem_szin">
+        <input type="submit" value="Search">
+    </form>
+
+    <table>
+        <tr>
+            <th>Szín</th>
+            <th>Súly</th>
+        </tr>
         <% for (let p of macskak) { %>
             <tr>
                 <td>
@@ -19,5 +30,6 @@
                 </td>
             </tr>
         <% } %>
+    </table>
 </body>
 </html>
